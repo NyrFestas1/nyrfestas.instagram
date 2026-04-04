@@ -3346,7 +3346,7 @@
         <div class="container">
             <div class="footer-logo">NYR | FESTAS</div>
             <div class="footer-socials">
-                <a href="mailto:vendas@mm88.com.br" class="footer-social-btn email" rel="noopener noreferrer">
+                <a href="/cdn-cgi/l/email-protection#3b4d5e555f5a487b5656030315585456155949" class="footer-social-btn email" rel="noopener noreferrer">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path
                             d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
@@ -3380,7 +3380,7 @@
         </svg>
     </a>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
 
@@ -3643,10 +3643,12 @@
             btn.disabled = true;
             input.disabled = true;
 
-            fetch(SCRIPT_URL + '?email=' + encodeURIComponent(email), {
-                method: 'GET',
-                mode: 'no-cors'
-            }).then(() => {
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({ email })
+            }).then(res => {
+                if (!res.ok) throw new Error('server_error');
                 localStorage.setItem('nyr_last_email_submit', Date.now().toString());
                 btn.textContent = '✓ CADASTRADO';
                 input.value = '';
